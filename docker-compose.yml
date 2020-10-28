@@ -1,0 +1,25 @@
+version: '3'
+services:
+  server:
+    image: jrabhishek/full_server
+    expose:
+      - ${APP_SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
+    ports:
+      - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+  client:
+    image: jrabhishek/full_client
+    expose:
+      - ${REACT_APP_PORT}
+    environment:
+      REACT_APP_PORT: ${REACT_APP_PORT}
+    ports:
+      - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    links:
+      - server
+    depends_on:
+      - server
+
+
